@@ -1,15 +1,16 @@
 //tslint:disable
 
-import { Server, Configuration, Logger, Container, Constants } from '@dpjayasekara/tscore';
+import { Server, Logger, Container, Constants, ConfigLoader } from '@dpjayasekara/tscore';
+import { IncomingMessage, OutgoingMessage } from 'http';
 
 export default class Main {
     private container: Container;
     private logger: Logger;
-    private config: Configuration;
+    private config: ConfigLoader.IConfigObj;
     private serviceA;
     private serviceB;
 
-    constructor(container: Container, logger: Logger, config: Configuration) {
+    constructor(container: Container, logger: Logger, config: ConfigLoader.IConfigObj) {
         this.container = container;
         this.logger = logger;
         this.config = config;
@@ -57,9 +58,8 @@ export default class Main {
             })
     }
 
-    private requestLogger(req, res, next) {
-        this.logger.info(res.locals.auth);
-        // this.logger.info(req);
+    private requestLogger(req: IncomingMessage, res: OutgoingMessage, next: Function) {
+        this.logger.info(`${req.method} ${req.url}`);
         next();
     }
 }

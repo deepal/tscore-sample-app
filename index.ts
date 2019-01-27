@@ -1,12 +1,14 @@
 //tslint:disable
 
-import {Launcher} from '@dpjayasekara/tscore'
+import {Launcher, ConfigLoader} from '@dpjayasekara/tscore'
 
 const launcher = new Launcher();
 
 launcher
     .onBaseDir(__dirname)
-    .withConfig('./config.json')
+    .withConfig(ConfigLoader.localConfigLoader({
+        filePath: './config.json'
+    }))
     .withLoggerConfig({
         name: 'myapp',
         level: 'debug'

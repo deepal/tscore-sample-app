@@ -1,8 +1,10 @@
+import { Container, Logger } from "@dpjayasekara/tscore";
+
 //tslint:disable
 export default class ModuleB {
-    private container : any;
-    private logger : any;
-    private config : any;
+    private container : Container;
+    private logger : Logger;
+    private config : object;
 
     constructor(container: any, logger: any, config: any) {
         this.container = container;
@@ -11,6 +13,6 @@ export default class ModuleB {
     }
 
     public sayAboutB() {
-        return `Hi, I'm from moduleB`;
+        return this.config;
     }
 }
